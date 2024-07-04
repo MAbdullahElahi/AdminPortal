@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ElahiNexusTech | Admin Panel</title>
+
+    <!-- CDN -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+        rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" />
+
+    {% load static %}
+    <link rel="shortcut icon" href="{% static 'media/imgs/logo.png' %}" type="image/x-icon" />
+    <link rel="stylesheet" href="{% static 'css/main.css' %}" />
+</head>
+
+<body>
+    {% if user.is_authenticated %}
+    <div class="container">
+        <div class="header">
+            <div class="left">
+                <h3>ElahiNexusTech</h3>
+                <h2>Admin Panel</h2>
+            </div>
+            <div class="right">
+                <form action="/logout" method="post">
+                    {% csrf_token %}
+                    {{ user }}&nbsp;
+                    <button class="red">logout</button>
+                </form>
+            </div>
+        </div>
+
+        <main>
+            <div class="data-sheet">
+                <p class="data-sheet-title title">Data Sheet Of Sales</p>
+                <br />
+                <hr /><br />
+                <table>
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Holder</th>
+                        <th>Contact Number</th>
+                        <th>Location</th>
+                        <th>Assignment</th>
+                        <th>Amount ($)</th>
+                        <th>Date</th>
+                        <th>Date Completed</th>
+                        <th>Account Number</th>
+                        <th>Socials</th>
+                        <th>Status</th>
+                    </tr>
+                    {% for sale in sales %}
+                    <tr>
+                        <td>{{ sale.id }}</td>
+                        <td>{{ sale.Name }}</td>
+                        <td>{{ sale.Holder }}</td>
+                        <td>{{ sale.ContactNumber }}</td>
+                        <td>{{ sale.Location }}</td>
+                        <td>{{ sale.Assignment }}</td>
+                        <td>{{ sale.Amount }}</td>
+                        <td>{{ sale.Date }}</td>
+                        <td>{{ sale.DateComplete }}</td>
+                        <td>{{ sale.AccountNumber }}</td>
+                        <td>{{ sale.Socials.socials }}</td>
+                        <td>{{ sale.Status }}</td>
+                    </tr>
+                    {% endfor %}
+                </table>
+                <div class="bottom">
+                    <br /><br />
+                    <hr /><br />
+                    <p class="subtitle">
+                        <span class="grey">Total Amount Generated:</span> <span style="color: var(--green);" id="currency"><span id="amount">{{ total_amount }}</span> $</span>
+                    </p>
+                    <br />
+                    <div>
+                        <button class="green" id="addRecordBtn">Add Record</button>
+                        <button class="orange" id="updateRecordBtn">Update Record</button>
+                        <button class="red" id="deleteRecordBtn">Delete Record</button>
+
+                    </div>
+                </div>
+            </div>
+
+            <!-- FORMS FOR DATA MANIPULATION -->
+
+            <!-- ADD RECORD -->
+            <div class="dataForm addRecordForm hide" id="addRecordForm">
+                <div class="header">
+                    <p class="subtitle">Add Record</p>
+                    <button id="closeRecordForm" class="circle red"><i class="bi bi-x-circle-fill"></i></button>
+                </div>
+                <br />
+                <hr /><br />
+
+                <form action="/addsale" method="post" class="form-field-container">
+                    {% csrf_token %}
+                    <section>
+                        <label for="name">Name</label>
+                        <input type="text" id="name" placeholder="Client Name..." name="name" required />
+                    </section>
+                    <section>
+                        <label for="holder_name">Holder</label>
+                        <select name="holder_name" id="holder_name">
+                            <option value="mabdullah.elahi">Muhammad Abdullah Elahi</option>
+                            <option value="hussain.sheikh">Muhammad Hussain Sheikh</option>
+                            <option value="mifham.elahi">Muhammad Ifham Elahi</option>
+                        </select>
+                    </section>
+                    <section>
+                        <label for="contact_num">Contact Number</label>
+                        <input type="text" id="contact_num" placeholder="Client Number..." name="contact_num"
+                            required />
+                    </section>
+                    <section>
+                        <label for="location">Location</label>
+                        <input type="text" id="location" placeholder="Client Location..." name="location" required />
+                    </section>
+                    <section>
+                        <label for="assignment">Assignment</label>
+                        <input type="text" id="assignment" placeholder="Task" name="assignment" required />
+                    </section>
+                    <section>
+                        <label for="amount">Amount</label>
+                        <input type="number" id="amount" placeholder="Task" name="amount" required />
+                    </section>
+                    <section>
+                        <label for="date">Date</label>
+                        <input type="date" id="date" placeholder="Date.." name="date" required />
+                    </section>
+                    <section>
+                        <label for="date_completed">Date Completed</label>
+                        <input type="date" id="date_completed" placeholder="Date when task completed...."
+                            name="date_completed" required />
+                    </section>
+                    <section>
+                        <label for="account_num">Acount Number</label>
+                        <input type="number" id="account_num" placeholder="Client's Account Number...."
+                            name="account_num" required />
+                    </section>
+                    <section>
+                        <label for="socials">Socials</label>
+                        <input type="text" id="socials" placeholder="Socials Of Client" name="socials" required />
+                    </section>
+                    <section>
+                        <label for="status">Status</label>
+                        <input type="checkbox" id="status" value="0" name="status" />
+                    </section>
+                    <section>
+                        <button class="green">Add Sale</button>
+                    </section>
+                </form>
+            </div>
+
+            <!-- UPDATE RECORD -->
+            <div class="dataForm updateRecordForm hide" id="updateRecordForm">
+                <div class="header">
+                    <p class="subtitle">Update Record</p>
+                    <button id="closeUpdateRecordFormBtn" class="circle red"><i
+                            class="bi bi-x-circle-fill"></i></button>
+                </div>
+                <br />
+                <hr /><br />
+
+                <form action="/updatesale" method="post" class="form-field-container">
+                    {% csrf_token %}
+
+                    <section>
+                        <label for="record_id">Record ID</label>
+                        <select name="record_id" id="record_id">
+                            {% for sale in sales %}
+                            <option value="{{ sale.id }}" data-name="{{ sale.Name }}" data-holder="{{ sale.Holder }}"
+                                data-contact="{{ sale.ContactNumber }}" data-location="{{ sale.Location }}"
+                                data-assignment="{{ sale.Assignment }}" data-amount="{{ sale.Amount }}"
+                                data-date="{{ sale.Date }}" data-datecomplete="{{ sale.DateComplete }}"
+                                data-account="{{ sale.AccountNumber }}" data-socials="{{ sale.Socials.socials }}"
+                                data-status="{{ sale.Status }}">{{ sale.id }}</option>
+                            {% endfor %}
+                        </select>
+                    </section>
+
+                    <section>
+                        <label for="record_name">Name</label>
+                        <input type="text" id="record_name" placeholder="Client Name..." name="record_name" required />
+                    </section>
+                    <section>
+                        <label for="record_holder_name">Holder</label>
+                        <select name="record_holder_name" id="record_holder_name">
+                            <option value="mabdullah.elahi">Muhammad Abdullah Elahi</option>
+                            <option value="hussain.sheikh">Muhammad Hussain Sheikh</option>
+                            <option value="mifham.elahi">Muhammad Ifham Elahi</option>
+                        </select>
+                    </section>
+                    <section>
+                        <label for="record_contact_num">Contact Number</label>
+                        <input type="text" id="record_contact_num" placeholder="Client Number..."
+                            name="record_contact_num" required />
+                    </section>
+                    <section>
+                        <label for="record_location">Location</label>
+                        <input type="text" id="record_location" placeholder="Client Location..." name="record_location"
+                            required />
+                    </section>
+                    <section>
+                        <label for="record_assignment">Assignment</label>
+                        <input type="text" id="record_assignment" placeholder="Task" name="record_assignment"
+                            required />
+                    </section>
+                    <section>
+                        <label for="record_amount">Amount</label>
+                        <input type="number" id="record_amount" placeholder="Task" name="record_amount" step="any"
+                            required />
+                    </section>
+                    <section>
+                        <label for="record_date">Date</label>
+                        <input type="date" id="record_date" placeholder="Date.." name="record_date" required />
+                    </section>
+                    <section>
+                        <label for="record_date_completed">Date Completed</label>
+                        <input type="date" id="record_date_completed" placeholder="Date when task completed...."
+                            name="record_date_completed" required />
+                    </section>
+                    <section>
+                        <label for="record_account_num">Acount Number</label>
+                        <input type="number" id="record_account_num" placeholder="Client's Account Number...."
+                            name="record_account_num" required />
+                    </section>
+                    <section>
+                        <label for="record_socials">Socials</label>
+                        <input type="text" id="record_socials" placeholder="Socials Of Client" name="record_socials"
+                            required />
+                    </section>
+                    <section>
+                        <label for="record_status">Status</label>
+                        <input type="checkbox" id="record_status{{ sale.id }}" name="record_status" />
+                    </section>
+                    <section>
+                        <button class="orange">Update Record</button>
+                    </section>
+                </form>
+            </div>
+
+            <!-- DELETE RECORD -->
+            <div class="dataForm deleteRecordForm hide" id="deleteRecordForm">
+                <div class="header">
+                    <p class="subtitle">Delete Record</p>
+                    <button id="closeDeleteRecordFormBtn" class="circle red"><i
+                            class="bi bi-x-circle-fill"></i></button>
+                </div>
+                <br />
+                <hr /><br />
+
+                <form action="/deletesale" method="post" class="form-field-container">
+                    {% csrf_token %}
+                    <section>
+                        <label for="record_id_to_delete">Record ID</label>
+                        <select name="record_id_to_delete" id="record_id_to_delete">
+                            {% for sale in sales %}
+                            <option value="{{ sale.id }}">{{ sale.id }}</option>
+                            {% endfor %}
+                        </select>
+                    </section>
+                    <section>
+                        <button class="red">Update Record</button>
+                    </section>
+                </form>
+            </div>
+        </main>
+
+        <footer>
+            <p>Made by ElahiNexusTech © Copyrights 2024.</p>
+        </footer>
+    </div>
+
+    {% else %}
+    <div class="container">
+        <div class="header">
+            <div class="left">
+                <h3>ElahiNexusTech</h3>
+                <h2>Admin Panel</h2>
+            </div>
+        </div>
+
+        <form action="/login" method="post" class="forms">
+            {% csrf_token %}
+            <h1>Login</h1>
+            <div>
+                <div>
+                    <label for="username">Username</label><br /><br />
+                    <input type="text" placeholder="username" id="username" name="username" required />
+                </div>
+                <br /><br /><br />
+                <div>
+                    <label for="password">Password</label><br /><br />
+                    <input type="password" placeholder="pas**ord" id="password" name="password" required />
+                </div>
+            </div>
+            <div id="msgalert">
+                {% for message in messages %}
+                {% if message.tags %}
+                <p class="{{ message.tags }}">{{ message }}</p>
+                {% endif %}
+                {% endfor %}
+            </div>
+            <div>
+                <button id="loginBtn">Login</button>
+            </div>
+        </form>
+
+        <footer>
+            <p>Made by ElahiNexusTech © Copyrights 2024.</p>
+        </footer>
+    </div>
+    {% endif %}
+</body>
+<script src="{% static 'js/main.js' %}"></script>
+
+</html>

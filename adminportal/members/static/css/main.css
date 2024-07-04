@@ -1,0 +1,384 @@
+:root {
+    --blue: #0077ff;
+    --green: #05c763;
+    --red: #f32100;
+    --orange: #ffa500;
+    --purple: #a600ff;
+    --blue-2: #90c4ff;
+    --red-2: #ffb8ad;
+    --green-2: #cfffe6;
+    --orange-2: #ffebc5;
+    --purple-2: #f3deff;
+    --grey: #b8b8b8;
+    --theme: #000000;
+    --success: #6ddb96;
+    --error: #ff4e4e;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    overflow-x: hidden;
+    background: #131313;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-direction: column;
+    height: 100vh;
+}
+
+
+hr {
+    border: solid 1px var(--grey);
+    border-radius: 3rem;
+}
+
+
+div.header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+div.header div.right {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+div.container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-direction: column;
+    height: 100vh;
+    background: radial-gradient(circle, rgba(29, 29, 29, 1) 0%, rgba(41, 41, 41, 0.8) 50%, rgba(0, 0, 0, 0.6) 100%);
+    width: 100%;
+    padding: 1rem;
+}
+
+form.forms {
+    background: #1b1b1b5a;
+    box-shadow: 0px 0px 10px #424242;
+    height: 60%;
+    width: 30%;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    flex-direction: column;
+    border-radius: 1rem;
+}
+
+form div {
+    width: 100%;
+    padding: 0 3rem;
+}
+
+form div button {
+    width: -webkit-fill-available;
+}
+
+form div#msgalert p.success {color: var(--success);}
+form div#msgalert p.error {color: var(--error);}
+
+
+button {
+    background: var(--blue);
+    padding: 0.5rem 1rem;
+    border-radius: 3rem;
+    border: none;
+    color: var(--blue-2);
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.3s;
+    height: min-content;
+    width: fit-content;
+}
+
+
+button.red {
+    background: var(--red);
+    color: var(--red-2);
+}
+
+button.green {
+    background: var(--green);
+    color: var(--green-2);
+}
+
+button.orange {
+    background: var(--orange);
+    color: var(--orange-2);
+}
+
+button.purple {
+    background: var(--purple);
+    color: var(--purple-2);
+}
+
+
+button:hover {box-shadow: 0px 0px 10px var(--blue);}
+button.red:hover {box-shadow: 0px 0px 10px var(--red);}
+button.green:hover {box-shadow: 0px 0px 10px var(--green);}
+button.orange:hover {box-shadow: 0px 0px 10px var(--orange);}
+button.purple:hover {box-shadow: 0px 0px 10px var(--purple);}
+
+
+button.circle {
+    padding: 0.5rem;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+
+input, select {
+    background: #343434;
+    padding: 0.8rem 1rem;
+    width: 100%;
+    font-size: 1rem;
+    border-radius: 3rem;
+    border: none;
+    outline: none;
+    color: white;
+}
+
+
+
+
+
+
+div.header {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    width: 100%;
+    /* background: yellow; */
+}
+
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: #1c1c1c;
+    margin: 20px 0;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+table tr:nth-child(1), 
+table tr:nth-child(1):hover {
+    background: var(--theme);
+    color: #fff;
+    font-weight: bold;
+}
+
+table tr {
+    background: #161616;
+}
+
+table tr:nth-child(even) {
+    background: #202020;
+}
+
+table tr:hover, 
+table tr:nth-child(even):hover {
+    background: #343434;
+}
+
+tr, th, td {
+    padding: 0.8rem 1rem;
+    text-align: center;
+    border: 1px solid #2a2a2a;
+}
+
+th, td {
+    padding: 1rem;
+}
+
+th {
+    background-color: var(--theme);
+    color: white;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+main {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+.data-sheet {
+    background: #131313;
+    box-shadow: 0px 0px 5px #232323;
+    border-radius: 1rem;
+    padding: 4rem;
+    width: 100%;
+    height: 80vh;
+    overflow: hidden;
+    position: relative;
+}
+.data-sheet::-webkit-scrollbar {
+    background: #1c1c1c;
+}
+
+.data-sheet div.bottom {
+    position: absolute;
+    bottom: 5%;
+}
+
+.data-sheet table {
+    overflow-y: scroll;
+}
+
+.dataForm {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: #202020a8;
+    width: 60%;
+    padding: 3rem;
+    backdrop-filter: blur(1rem);
+    -webkit-backdrop-filter: blur(1rem);
+    border-radius: 1rem;
+    border: solid 2px #202020;
+    box-shadow: 0px 0px 15px #141414;
+    transition: 0.3s;
+}
+
+.dataForm .header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.dataForm .header button {
+    padding: 0;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.dataForm .header button i {
+    font-size: 1.5rem;
+}
+
+.dataForm form.form-field-container {
+    display: grid;
+    grid-template-columns: auto auto auto;
+    gap: 0.5rem 1rem;
+    width: 100%;
+    background: transparent;
+    box-shadow: none;
+    padding: 1rem;
+}
+
+.dataForm form.form-field-container section {
+    margin: 1rem;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.dataForm form.form-field-container section label {
+    margin-bottom: 0.4rem;
+}
+
+
+.hide {
+    opacity: 0;
+    visibility: hidden;
+}
+
+.show {
+    opacity: 1;
+    visibility: visible;
+}
+
+
+/* Colors */
+.grey {
+    color: var(--grey);
+}
+
+
+
+/* text styles */
+
+.title {
+    font-size: 3rem;
+    font-weight: 800;
+}
+.subtitle {
+    font-size: 1.5rem ;
+    font-weight: 600;
+}
+
+
+@media (max-width: 1200px) {
+    form.forms {
+        width: 50%;
+    }
+}
+
+@media (max-width: 700px) {
+    form.forms {
+        width: 100%;
+    }
+
+    form div {
+        width: 100%;
+        padding: 0 1rem;
+    }
+    .data-sheet {
+        padding: 2rem;
+        width: 100%;
+        min-height: 130vh;
+        overflow-y: scroll;
+        position: relative;
+    }
+}
+
+
+@media (max-width: 768px) {
+    table, th, td {
+        display: block;
+    }
+    
+    th {
+        display: none;
+    }
+    
+    tr {
+        margin-bottom: 10px;
+        display: block;
+    }
+    
+    td {
+        text-align: right;
+        padding-left: 50%;
+        position: relative;
+    }
+    
+    td::before {
+        content: attr(data-label);
+        position: absolute;
+        left: 0;
+        width: 50%;
+        padding-left: 15px;
+        font-weight: bold;
+        text-align: left;
+    }
+}
